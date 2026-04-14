@@ -1,0 +1,45 @@
+<!-- Fragmento de Usuarios para el contenido -->
+
+<h2>👤 Usuarios</h2>
+
+<form action="/usuarios/insertar" method="POST" class="mb-3">
+    <div class="row">
+        <div class="col"><input name="nombre" class="form-control" placeholder="Nombre"></div>
+        <div class="col"><input name="apellidos" class="form-control" placeholder="Apellidos"></div>
+        <div class="col"><input name="correo" class="form-control" placeholder="Correo"></div>
+        <div class="col"><input name="telefono" class="form-control" placeholder="Teléfono"></div>
+        <div class="col"><button class="btn btn-success">Agregar</button></div>
+    </div>
+</form>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% usuarios.forEach(u => { %>
+        <tr>
+            <td><%= u.ID_USUARIO %></td>
+            <td><%= u.NOMBRE %></td>
+            <td><%= u.APELLIDOS %></td>
+            <td><%= u.CORREO %></td>
+            <td><%= u.TELEFONO %></td>
+
+            <td>
+                <form action="/usuarios/eliminar" method="POST" class="d-inline">
+                    <input type="hidden" name="id_usuario" value="<%= u.ID_USUARIO %>">
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>

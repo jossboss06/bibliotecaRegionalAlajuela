@@ -1,0 +1,159 @@
+<h1 class="mb-3">📊 Vistas Generales</h1>
+<h2 class="mb-3">Préstamos por Usuario</h2>
+<hr> <!-- Tabla con las vista-->
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Usuario</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Total Préstamos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% usuarios.forEach(usuario=> { %> <tr>
+                    <td>
+                        <%= usuario.ID_USUARIO %>
+                    </td>
+                    <td>
+                        <%= usuario.NOMBRE_COMPLETO %>
+                    </td>
+                    <td>
+                        <%= usuario.CORREO %>
+                    </td>
+                    <td>
+                        <%= usuario.ESTADO %>
+                    </td>
+                    <td>
+                        <%= usuario.TOTAL_PRESTAMOS %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
+<h2 class="mb-3">Préstamos por Libro</h2>
+<hr> <!-- Tabla con la vista de prestamos por libro-->
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Libro</th>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Categoria</th>
+                <th>Veces prestado</th>
+                <th>Cantidad Total</th>
+                <th>Cantidad Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% libros.forEach(libro=> { %> <tr>
+                    <td>
+                        <%= libro.ID_LIBRO %>
+                    </td>
+                    <td>
+                        <%= libro.TITULO %>
+                    </td>
+                    <td>
+                        <%= libro.AUTOR %>
+                    </td>
+                    <td>
+                        <%= libro.CATEGORIA %>
+                    </td>
+                    <td>
+                        <%= libro.VECES_PRESTADO %>
+                    </td>
+                    <td>
+                        <%= libro.CANTIDAD_TOTAL %>
+                    </td>
+                    <td>
+                        <%= libro.CANTIDAD_DISPONIBLE %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
+<h2 class="mb-3">Libros no devueltos</h2>
+<hr> <!-- Tabla con la vista de Libros no devueltos -->
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Prestamo</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Libro</th>
+                <th>Fecha Prestamo</th>
+                <th>Fecha limite</th>
+                <th>Estado Prestamo</th>
+                <th>Dias desde limite</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% prestamos.forEach(prestamo=> { %> <tr>
+                    <td>
+                        <%= prestamo.ID_PRESTAMO %>
+                    </td>
+                    <td>
+                        <%= prestamo.USUARIO %>
+                    </td>
+                    <td>
+                        <%= prestamo.CORREO %>
+                    </td>
+                    <td>
+                        <%= prestamo.LIBRO %>
+                    </td>
+                    <td>
+                        <%= prestamo.FECHA_PRESTAMO %>
+                    </td>
+                    <td>
+                        <%= prestamo.FECHA_LIMITE %>
+                    </td>
+                    <td>
+                        <%= prestamo.ESTADO_PRESTAMO %>
+                    </td>
+                    <td>
+                        <%= prestamo.DIAS_DESDE_LIMITE %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
+<h2 class="mb-3">Multas Pendientes</h2>
+<hr>
+<div class="table-responsive mb-4">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Usuario</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+                <th>Libro</th>
+                <th>ID Multa</th>
+                <th>Monto</th>
+                <th>Fecha Límite</th>
+                <th>Fecha Devolución</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% multas.forEach(m => { %>
+                <tr>
+                    <td><%= m.ID_USUARIO %></td>
+                    <td><%= m.USUARIO %></td>
+                    <td><%= m.ESTADO %></td>
+                    <td><%= m.LIBRO %></td>
+                    <td><%= m.ID_MULTA %></td>
+                    <td><%= m.MONTO %></td>
+                    <td><%= m.FECHA_LIMITE %></td>
+                    <td><%= m.FECHA_DEVOLUCION %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

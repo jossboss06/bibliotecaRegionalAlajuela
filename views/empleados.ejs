@@ -1,0 +1,62 @@
+<!-- Fragmento de Empleados para el contenido -->
+
+<h2>🧑‍💼 Empleados</h2>
+
+<!-- FORM INSERT -->
+<form action="/empleados/insertar" method="POST" class="mb-3">
+    <div class="row">
+        <div class="col"><input name="nombre" class="form-control" placeholder="Nombre"></div>
+        <div class="col"><input name="apellido" class="form-control" placeholder="Apellido"></div>
+        <div class="col"><input name="usuario" class="form-control" placeholder="Usuario"></div>
+        <div class="col"><input name="contrasena" type="password" class="form-control" placeholder="Contraseña"></div>
+        <div class="col"><button class="btn btn-success">Agregar</button></div>
+    </div>
+</form>
+
+<!-- TABLA -->
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Usuario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% empleados.forEach(e=> { %>
+            <tr>
+                <td>
+                    <%= e.ID_EMPLEADO %>
+                </td>
+                <td>
+                    <%= e.NOMBRE %>
+                </td>
+                <td>
+                    <%= e.APELLIDO %>
+                </td>
+                <td>
+                    <%= e.USUARIO %>
+                </td>
+
+                <td>
+                    <!-- UPDATE -->
+                    <form action="/empleados/actualizar" method="POST" class="d-inline">
+                        <input type="hidden" name="id_empleado" value="<%= e.ID_EMPLEADO %>">
+                        <input type="hidden" name="nombre" value="<%= e.NOMBRE %>">
+                        <input type="hidden" name="apellido" value="<%= e.APELLIDO %>">
+                        <button class="btn btn-warning btn-sm">Actualizar</button>
+                    </form>
+
+                    <!-- DELETE -->
+                    <form action="/empleados/eliminar" method="POST" class="d-inline">
+                        <input type="hidden" name="id_empleado" value="<%= e.ID_EMPLEADO %>">
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>

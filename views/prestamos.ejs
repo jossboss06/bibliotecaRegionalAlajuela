@@ -1,0 +1,64 @@
+<!-- Fragmento de Préstamos para el contenido -->
+
+<h2>📦 Préstamos</h2>
+
+<form action="/prestamos/insertar" method="POST" class="mb-3">
+    <div class="row">
+        <div class="col"><input name="id_usuario" class="form-control" placeholder="ID Usuario"></div>
+        <div class="col"><input name="id_empleado" class="form-control" placeholder="ID Empleado"></div>
+        <div class="col"><input name="fecha_limite" type="date" class="form-control"></div>
+        <div class="col"><button class="btn btn-success">Agregar</button></div>
+    </div>
+</form>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Empleado</th>
+            <th>Fecha</th>
+            <th>Límite</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% prestamos.forEach(p=> { %>
+            <tr>
+                <td>
+                    <%= p.ID_PRESTAMO %>
+                </td>
+                <td>
+                    <%= p.ID_USUARIO %>
+                </td>
+                <td>
+                    <%= p.ID_EMPLEADO %>
+                </td>
+                <td>
+                    <%= p.FECHA_PRESTAMO %>
+                </td>
+                <td>
+                    <%= p.FECHA_LIMITE %>
+                </td>
+                <td>
+                    <%= p.ESTADO %>
+                </td>
+
+                <td>
+                    <form action="/prestamos/actualizar" method="POST" class="d-inline">
+                        <input type="hidden" name="id_prestamo" value="<%= p.ID_PRESTAMO %>">
+                        <input type="hidden" name="estado" value="DEVUELTO">
+                        <button class="btn btn-warning btn-sm">Actualizar</button>
+                    </form>
+
+                    <form action="/prestamos/eliminar" method="POST" class="d-inline">
+                        <input type="hidden" name="id_prestamo" value="<%= p.ID_PRESTAMO %>">
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>

@@ -1,0 +1,69 @@
+<!-- Fragmento de Libros para el contenido -->
+
+<h2>📖 Libros</h2>
+
+<form action="/libros/insertar" method="POST" class="mb-3">
+    <div class="row">
+        <div class="col"><input name="titulo" class="form-control" placeholder="Título"></div>
+        <div class="col"><input name="id_autor" class="form-control" placeholder="ID Autor"></div>
+        <div class="col"><input name="id_categoria" class="form-control" placeholder="ID Categoría">
+        </div>
+        <div class="col"><input name="anio" class="form-control" placeholder="Año"></div>
+        <div class="col"><input name="isbn" class="form-control" placeholder="ISBN"></div>
+        <div class="col"><input name="total" class="form-control" placeholder="Cantidad"></div>
+        <div class="col"><button class="btn btn-success">Agregar</button></div>
+    </div>
+</form>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Categoría</th>
+            <th>Total</th>
+            <th>Disponible</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% libros.forEach(l=> { %>
+            <tr>
+                <td>
+                    <%= l.ID_LIBRO %>
+                </td>
+                <td>
+                    <%= l.TITULO %>
+                </td>
+                <td>
+                    <%= l.ID_AUTOR %>
+                </td>
+                <td>
+                    <%= l.ID_CATEGORIA %>
+                </td>
+                <td>
+                    <%= l.CANTIDAD_TOTAL %>
+                </td>
+                <td>
+                    <%= l.CANTIDAD_DISPONIBLE %>
+                </td>
+
+                <td>
+                    <form action="/libros/actualizar" method="POST" class="d-inline">
+                        <input type="hidden" name="id_libro" value="<%= l.ID_LIBRO %>">
+                        <input type="hidden" name="titulo" value="<%= l.TITULO %>">
+                        <input type="hidden" name="stock" value="<%= l.CANTIDAD_DISPONIBLE %>">
+                        <button class="btn btn-warning btn-sm">Actualizar</button>
+                    </form>
+
+                    <form action="/libros/eliminar" method="POST" class="d-inline">
+                        <input type="hidden" name="id_libro" value="<%= l.ID_LIBRO %>">
+                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>
