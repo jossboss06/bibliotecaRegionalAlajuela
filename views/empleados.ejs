@@ -14,8 +14,8 @@
 </form>
 
 <!-- TABLA -->
-<table class="table table-striped table-bordered">
-    <thead class="table-dark">
+<table class="table align-middle table-white table-hover table-bordered border-warning">
+    <thead class="table-warning">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -47,13 +47,16 @@
                         <input type="hidden" name="id_empleado" value="<%= e.ID_EMPLEADO %>">
                         <input type="hidden" name="nombre" value="<%= e.NOMBRE %>">
                         <input type="hidden" name="apellido" value="<%= e.APELLIDO %>">
-                        <button class="btn btn-warning btn-sm">Actualizar</button>
+                        <div class="d-inline-flex gap-2"><button class="btn btn-warning btn-sm">Actualizar</button>
+                        </div>
+
                     </form>
 
                     <!-- DELETE -->
                     <form action="/empleados/eliminar" method="POST" class="d-inline">
                         <input type="hidden" name="id_empleado" value="<%= e.ID_EMPLEADO %>">
-                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                        <div class="d-inline-flex gap-2"><button class="btn btn-danger btn-sm">Eliminar</button>
+                        </div>
                     </form>
                 </td>
             </tr>
