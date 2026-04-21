@@ -1,0 +1,50 @@
+<!-- Fragmento de Préstamos para el contenido -->
+
+<h2>✏️ Actualizar Préstamo</h2>
+
+<form action="/prestamos/actualizar" method="POST">
+
+    <input type="hidden" name="id_prestamo" value="<%= prestamo.ID_PRESTAMO %>">
+
+    <div class="mb-3">
+        <label>ID Usuario</label>
+        <input class="form-control" value="<%= prestamo.ID_USUARIO %>" disabled>
+    </div>
+
+    <div class="mb-3">
+        <label>ID Empleado</label>
+        <input class="form-control" value="<%= prestamo.ID_EMPLEADO %>" disabled>
+    </div>
+
+    <div class="mb-3">
+        <label>Libros del préstamo</label>
+
+        <% if (libros.length > 0) { %>
+            <% libros.forEach(l => { %>
+                <div class="form-control mb-2">
+                    📘 ID Libro: <%= l.ID_LIBRO %> | Cantidad: <%= l.CANTIDAD %>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="text-danger">No hay libros en este préstamo</div>
+        <% } %>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha Límite</label>
+        <input type="date" name="fecha_limite" class="form-control"
+            value="<%= prestamo.FECHA_LIMITE.toISOString().split('T')[0] %>">
+    </div>
+
+    <div class="mb-3">
+        <label>Estado</label>
+        <select name="estado" class="form-control">
+            <option value="ACTIVO" <%= prestamo.ESTADO === 'ACTIVO' ? 'selected' : '' %>>ACTIVO</option>
+            <option value="DEVUELTO" <%= prestamo.ESTADO === 'DEVUELTO' ? 'selected' : '' %>>DEVUELTO</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Guardar cambios</button>
+    <a href="/prestamos" class="btn btn-secondary">Cancelar</a>
+
+</form>

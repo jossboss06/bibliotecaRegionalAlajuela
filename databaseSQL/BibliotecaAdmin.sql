@@ -398,9 +398,16 @@ END;
 
 -- Para usuarios
 
-CREATE OR REPLACE PROCEDURE sp_insert_usuario(p_nombre VARCHAR2,p_ap VARCHAR2,p_correo VARCHAR2,p_tel VARCHAR2)
-AS BEGIN
-INSERT INTO usuario VALUES(NULL,p_nombre,p_ap,p_correo,p_tel,'ACTIVO');
+CREATE OR REPLACE PROCEDURE sp_insert_usuario (
+  p_nombre VARCHAR2,
+  p_apellidos VARCHAR2,
+  p_correo VARCHAR2,
+  p_telefono VARCHAR2
+)
+AS
+BEGIN
+  INSERT INTO usuario (nombre, apellidos, correo, telefono)
+  VALUES (p_nombre, p_apellidos, p_correo, p_telefono);
 END;
 /
 

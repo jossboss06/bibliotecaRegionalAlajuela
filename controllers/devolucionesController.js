@@ -1,36 +1,62 @@
 const { getConnection } = require('../config/db');
 const oracledb = require('oracledb');
 
+// Lista las devoluciones con información del libro
 const listarDevoluciones = async (req, res) => {
-  let conn = await getConnection();
+  let conn;
+  try {
+    conn = await getConnection();
+    
+    // Unimos DEVOLUCION -> DETALLE_PRESTAMO -> LIBRO
+    const result = await conn.execute(
+      `SELECT dev.id_devolucion, 
+              l.titulo AS detalle_libro, 
+              dev.fecha_devolucion, 
+              dev.observacion 
+       FROM devolucion dev
+       JOIN detalle_prestamo dp ON dev.id_detalle = dp.id_detalle
+       JOIN libro l ON dp.id_libro = l.id_libro`,
+      [],
+      { outFormat: oracledb.OUT_FORMAT_OBJECT }
+    );
 
-  const result = await conn.execute(
-    `SELECT * FROM devolucion`,
-    [],
-    { outFormat: oracledb.OUT_FORMAT_OBJECT }
-  );
-
-  await conn.close();
-
-  res.render('devoluciones', {
+    res.render('devoluciones', {
       layout: 'layout',
       title: '🔄 Devoluciones',
       devoluciones: result.rows
     });
+  } catch (err) {
+    console.error("Error al listar devoluciones:", err);
+    res.status(500).send("Error en el servidor");
+  } finally {
+    if (conn) await conn.close();
+  }
 };
 
 const insertarDevolucion = async (req, res) => {
-  let conn = await getConnection();
+  let conn;
+  try {
+    conn = await getConnection();
+    
+    const { id_detalle, observacion } = req.body;
 
-  const { detalle, obs } = req.body;
+    // Llamamos al procedimiento (asegúrate que el nombre sea el que tienes en Oracle)
+    await conn.execute(
+      `BEGIN sp_insert_devolucion(:det, :obs); END;`,
+      { 
+        det: id_detalle, 
+        obs: observacion 
+      },
+      { autoCommit: true }
+    );
 
-  await conn.execute(
-    `BEGIN sp_insert_devolucion(:d,:o); END;`,
-    { d: detalle, o: obs }
-  );
-
-  await conn.close();
-  res.redirect('/devoluciones');
+    res.redirect('/devoluciones');
+  } catch (err) {
+    console.error("Error al insertar devolución:", err);
+    res.status(500).send("Error al insertar: " + err.message);
+  } finally {
+    if (conn) await conn.close();
+  }
 };
 
 const actualizarDevolucion = async (req, res) => {

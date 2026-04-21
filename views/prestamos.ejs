@@ -5,6 +5,7 @@
 <form action="/prestamos/insertar" method="POST" class="mb-3">
     <div class="row">
         <div class="col"><input name="id_usuario" class="form-control" placeholder="ID Usuario"></div>
+        <div class="col"><input name="id_libro" class="form-control" placeholder="ID Libro"></div>
         <div class="col"><input name="id_empleado" class="form-control" placeholder="ID Empleado"></div>
         <div class="col"><input name="fecha_limite" type="date" class="form-control"></div>
         <div class="col"><button class="btn btn-success">Agregar</button></div>
@@ -16,6 +17,8 @@
         <tr>
             <th>ID</th>
             <th>Usuario</th>
+            <th>ID Libro</th>
+            <th>Libro</th>
             <th>Empleado</th>
             <th>Fecha</th>
             <th>Límite</th>
@@ -31,7 +34,13 @@
                     <%= p.ID_PRESTAMO %>
                 </td>
                 <td>
-                    <%= p.ID_USUARIO %>
+                    <%= p.USUARIO %>
+                </td>
+                <td>
+                    <%= p.ID_LIBRO %>
+                </td>
+                <td>
+                    <%= p.LIBRO %>
                 </td>
                 <td>
                     <%= p.ID_EMPLEADO %>
@@ -47,12 +56,9 @@
                 </td>
 
                 <td>
-                    <form action="/prestamos/actualizar" method="POST" class="d-inline">
-                        <input type="hidden" name="id_prestamo" value="<%= p.ID_PRESTAMO %>">
-                        <input type="hidden" name="estado" value="DEVUELTO">
-                        <div class="d-inline-flex gap-2"><button class="btn btn-warning btn-sm">Actualizar</button>
-                        </div>
-                    </form>
+                    <a href="/prestamos/editar/<%= p.ID_PRESTAMO %>" class="btn btn-warning btn-sm">
+                        Actualizar
+                    </a>
 
                     <form action="/prestamos/eliminar" method="POST" class="d-inline">
                         <input type="hidden" name="id_prestamo" value="<%= p.ID_PRESTAMO %>">
